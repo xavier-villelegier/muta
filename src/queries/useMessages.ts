@@ -10,5 +10,6 @@ export const useMessageCreate = () =>
         content: {
           coordinates,
         },
+        is_mobile: true,
       })
   )
