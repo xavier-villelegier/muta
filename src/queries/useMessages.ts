@@ -6,7 +6,7 @@ interface Point {
   y: number
 }
 
-export const useChecklistCreate = () =>
+export const useMessageCreate = () =>
   useMutation(
     ['messages'],
     async ({ coordinates }: { coordinates: Point[] }) =>
