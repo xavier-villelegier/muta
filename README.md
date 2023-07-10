@@ -49,6 +49,29 @@ cd server && bin/rails server -b 0.0.0.0
 
 On `http://127.0.0.1:3000` you should see the rails home page, this means your backend server is running correctly
 
+## Deamon to communicate with skin and robotic arm
+
+- Go in the `server` directory
+
+  ```
+  cd server
+  ```
+
+- Start the deamon
+
+  ```
+  bin/rails runner lib/deamon.rb -b 0.0.0.0
+  ```
+
+- Try to send a message to see it in the deamon
+
+  ```
+  rails c # Start a rails console
+
+  s = UDPSocket.new # create a new udp socket
+  s.send("hello", 0, 'localhost', 3001) # Send the message, yo should see it in the deamon
+  ```
+
 ### TODO:
 
 [X] discossier le provider du message ('skin'/'phone')

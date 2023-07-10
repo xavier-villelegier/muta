@@ -19,7 +19,7 @@ end
 def listen_skin_messages
   puts "SKIN - Listening skin for messages…"
   socket = UDPSocket.new
-  socket.bind("localhost", 4242)
+  socket.bind("localhost", 3001)
   puts "SKIN - Client connected"
 
   while 1
