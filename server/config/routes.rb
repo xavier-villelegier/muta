@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :messages, only: [:create]
+  resources :last_messages, only: [:index]
 end
