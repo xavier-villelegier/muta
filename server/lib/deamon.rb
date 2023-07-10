@@ -25,7 +25,8 @@ def listen_skin_messages
     puts "SKIN - Waiting for request"
     message = socket.recvfrom(1024)
     puts "SKIN - Message received: #{message}"
-    # Message.create!(content: message)
+    # message = Message.create!(content: message)
+    # listen_app_messages.thread_variable_set(:last_message_id, message.id)
   end
 end
 
