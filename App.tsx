@@ -1,10 +1,10 @@
-import { StatusBar } from 'expo-status-bar'
-import DrawScreen from './src/DrawScreen'
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import axios from 'axios'
 import { Platform, UIManager } from 'react-native'
 import { NativeBaseProvider } from 'native-base'
+import { StatusBar } from 'expo-status-bar'
+
+import DrawScreen from './src/screens/DrawScreen'
 
 const queryClient = new QueryClient()
 
