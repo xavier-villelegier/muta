@@ -1,20 +1,28 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import DrawScreen from './src/DrawScreen'
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import axios from 'axios'
+import { Platform, UIManager } from 'react-native'
+import { NativeBaseProvider } from 'native-base'
+
+const queryClient = new QueryClient()
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true)
+  }
+}
+
+axios.defaults.baseURL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2:3000'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider>
+      <QueryClientProvider client={queryClient}>
+        <StatusBar />
+        <DrawScreen />
+      </QueryClientProvider>
+    </NativeBaseProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
