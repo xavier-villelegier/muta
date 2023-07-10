@@ -1,7 +1,7 @@
 import { Button, Text, View } from 'native-base'
-import DrawCanvas from '../components/DrawCanvas'
 import { useMessageCreate } from '../queries/useMessages'
 import { useLastMessagesIndex } from '../queries/useLastMessages'
+import Draw from '../components/Draw'
 
 const DrawScreen = () => {
   const { mutateAsync: sendMessage } = useMessageCreate()
@@ -19,16 +19,18 @@ const DrawScreen = () => {
   }
 
   return (
-    <View flex={1} alignItems="center" justifyContent="center">
-      <DrawCanvas />
-      <Button onPress={handleSend}>Send</Button>
-      <Text>Last message received</Text>
-      {lastMessageReceived && (
-        <Text>
-          {lastMessageReceived.id} - {lastMessageReceived.content}
-        </Text>
-      )}
-    </View>
+    <>
+      <Draw />
+      <View flex={1} alignItems="center" justifyContent="center">
+        <Button onPress={handleSend}>Send</Button>
+        <Text>Last message received</Text>
+        {lastMessageReceived && (
+          <Text>
+            {lastMessageReceived.id} - {lastMessageReceived.content}
+          </Text>
+        )}
+      </View>
+    </>
   )
 }
 
