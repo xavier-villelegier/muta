@@ -15,3 +15,36 @@ web-build/
 
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
+windows/.gitignore
+windows/ExperimentalFeatures.props
+windows/muta.sln
+windows/NuGet.Config
+windows/muta/.gitignore
+windows/muta/App.cpp
+windows/muta/App.h
+windows/muta/App.idl
+windows/muta/App.xaml
+windows/muta/AutolinkedNativeModules.g.cpp
+windows/muta/AutolinkedNativeModules.g.h
+windows/muta/AutolinkedNativeModules.g.props
+windows/muta/AutolinkedNativeModules.g.targets
+windows/muta/MainPage.cpp
+windows/muta/MainPage.h
+windows/muta/MainPage.idl
+windows/muta/MainPage.xaml
+windows/muta/muta.vcxproj
+windows/muta/muta.vcxproj.filters
+windows/muta/Package.appxmanifest
+windows/muta/pch.cpp
+windows/muta/pch.h
+windows/muta/PropertySheet.props
+windows/muta/ReactPackageProvider.cpp
+windows/muta/ReactPackageProvider.h
+windows/muta/Assets/LockScreenLogo.scale-200.png
+windows/muta/Assets/SplashScreen.scale-200.png
+windows/muta/Assets/Square44x44Logo.scale-200.png
+windows/muta/Assets/Square44x44Logo.targetsize-24_altform-unplated.png
+windows/muta/Assets/Square150x150Logo.scale-200.png
+windows/muta/Assets/StoreLogo.png
+windows/muta/Assets/Wide310x150Logo.scale-200.png
+metro.config.js
