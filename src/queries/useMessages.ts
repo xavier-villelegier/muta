@@ -1,10 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 
-interface Point {
-  x: number
-  y: number
-}
+type Point = [number, number]
 
 export const useMessageCreate = () =>
   useMutation(
