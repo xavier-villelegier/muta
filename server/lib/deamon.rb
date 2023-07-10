@@ -17,15 +17,16 @@ end
 
 def listen_skin_messages
   puts "SKIN - Listening skin for messages…"
-  socket = TCPServer.new(4242)
-
-  client = socket.accept
+  socket = UDPSocket.new
+  socket.bind("localhost", 4242)
   puts "SKIN - Client connected"
 
-  puts "SKIN - Waiting for request"
-  request = client.gets
-
-  puts "SKIN - Request received: #{request}"
+  while 1
+    puts "SKIN - Waiting for request"
+    message = socket.recvfrom(1024)
+    puts "SKIN - Message received: #{message}"
+    # Message.create!(content: message)
+  end
 end
 
 skin_messages_thread = Thread.new { listen_skin_messages }
