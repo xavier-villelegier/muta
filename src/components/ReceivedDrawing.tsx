@@ -11,8 +11,6 @@ export const ReceivedDrawing = ({ message }: { message: Point[] }) => {
     path.lineTo(x, y)
   })
 
-  console.log(path)
-
   return (
     <Canvas style={{ flex: 1 }}>
       <Path path={path} strokeWidth={5} style="stroke" color="#000000" />

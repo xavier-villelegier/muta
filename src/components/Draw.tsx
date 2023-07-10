@@ -53,7 +53,6 @@ export default function Draw() {
       coordinates: pathCoordinates.current,
     })
     onClear()
-    console.log('Message sent')
   }
 
   return (

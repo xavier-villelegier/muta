@@ -1,16 +1,31 @@
 require 'test_helper'
 
 class MessagesControllerTest < ActionDispatch::IntegrationTest
-  test '#create' do
-    content = '{
-      "coordinates": [[10,10],[20,10],[10,20],[20,20]]
-    }'
+  test '#create with mobile' do
+    content = {
+      "coordinates": [{x:10,y:10},{x:20,y:10},{x:10,y:20},{x:20,y:20}]
+    }
+
+    assert_difference -> { Message.count }, 1 do
+      post messages_path, params: { content: content, is_mobile: true }
+    end
+
+    message = Message.last
+    assert_equal [{"x"=>"10", "y"=>"10"}, {"x"=>"20", "y"=>"10"}, {"x"=>"10", "y"=>"20"}, {"x"=>"20", "y"=>"20"}], message.content
+    assert_equal 'mobile', message.user
+  end
+
+   test '#create with device' do
+    content = {
+      "coordinates": [{x:10,y:10},{x:20,y:10},{x:10,y:20},{x:20,y:20}]
+    }
 
     assert_difference -> { Message.count }, 1 do
       post messages_path, params: { content: content }
     end
 
     message = Message.last
-    assert_equal '[[10, 10], [20, 10], [10, 20], [20, 20]]', message.content
+    assert_equal [{"x"=>"10", "y"=>"10"}, {"x"=>"20", "y"=>"10"}, {"x"=>"10", "y"=>"20"}, {"x"=>"20", "y"=>"20"}], message.content
+    assert_equal 'device', message.user
   end
 end

@@ -41,6 +41,12 @@ You should be able to start an iOS and Android simulator from the menu and see t
 cd server && bin/rails server
 ```
 
+Or this command to allow access your Rails server from a different machine
+
+```
+cd server && bin/rails server -b 0.0.0.0
+```
+
 On `http://127.0.0.1:3000` you should see the rails home page, this means your backend server is running correctly
 
 ### TODO:
