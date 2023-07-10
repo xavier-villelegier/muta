@@ -1,5 +1,6 @@
 import { Text } from 'native-base'
+import { Canvas } from '@benjeau/react-native-draw';
 
-const DrawCanvas = () => <Text>DrawScreen</Text>
+const DrawCanvas = () => <Canvas />;
 
 export default DrawCanvas
