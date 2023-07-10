@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { View } from 'react-native'
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Canvas, Path } from '@shopify/react-native-skia'
@@ -20,7 +20,7 @@ export interface Point {
 export default function Draw() {
   const { mutateAsync: sendMessage } = useMessageCreate()
   const [paths, setPaths] = useState<IPath[]>([])
-  const [pathsCoordinates, setPathsCoordinates] = useState<Point[]>([])
+  const pathCoordinates = useRef<Point[]>([])
 
   const pan = Gesture.Pan()
     .onStart((g) => {
@@ -31,7 +31,7 @@ export default function Draw() {
       }
       newPaths[paths.length].segments.push(`M ${g.x} ${g.y}`)
       setPaths(newPaths)
-      setPathsCoordinates((pathsCoordinates) => [...pathsCoordinates, { x: g.x, y: g.y }])
+      pathCoordinates.current = [{ x: g.x, y: g.y }]
     })
     .onUpdate((g) => {
       const index = paths.length - 1
@@ -39,7 +39,7 @@ export default function Draw() {
       if (newPaths?.[index]?.segments) {
         newPaths[index].segments.push(`L ${g.x} ${g.y}`)
         setPaths(newPaths)
-        setPathsCoordinates((pathsCoordinates) => [...pathsCoordinates, { x: g.x, y: g.y }])
+        pathCoordinates.current.push({ x: g.x, y: g.y })
       }
     })
     .minDistance(1)
