@@ -49,10 +49,10 @@ export default function Draw() {
   }
 
   const onSend = async () => {
-    console.log({ pathCoordinates: pathCoordinates.current })
     await sendMessage({
       coordinates: pathCoordinates.current,
     })
+    onClear()
     console.log('Message sent')
   }
 

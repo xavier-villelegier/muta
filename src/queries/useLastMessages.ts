@@ -8,5 +8,5 @@ export const useLastMessagesIndex = () =>
       const { data } = await axios.get('/last_messages')
       return data
     },
-    { refetchInterval: 5000 }
+    { refetchInterval: 1000 }
   )
