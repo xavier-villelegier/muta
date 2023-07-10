@@ -10,6 +10,7 @@ def listen_app_messages
     if has_new_message
       puts Message.last.content
       last_message_id = new_last_message_id
+      # send message to robotic arm
     end
     sleep 5
   end
@@ -23,7 +24,7 @@ def listen_skin_messages
 
   while 1
     puts "SKIN - Waiting for request"
-    message = socket.recvfrom(1024)
+    message, = socket.recvfrom(1024)
     puts "SKIN - Message received: #{message}"
     # message = Message.create!(content: message)
     # listen_app_messages.thread_variable_set(:last_message_id, message.id)
