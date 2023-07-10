@@ -15,6 +15,7 @@ if (Platform.OS === 'android') {
 }
 
 axios.defaults.baseURL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2:3000'
+// axios.defaults.baseURL = 'http://172.18.6.224:3000'
 
 export default function App() {
   return (
