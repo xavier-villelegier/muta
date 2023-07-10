@@ -10,7 +10,7 @@ interface IPath {
   color?: string
 }
 
-interface Point {
+export interface Point {
   x: number
   y: number
 }
