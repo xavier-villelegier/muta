@@ -1,17 +1,19 @@
 import { useLastMessagesIndex } from '../queries/useLastMessages'
-import Draw from '../components/Draw'
-import { ReceivedDrawing } from '../components/ReceivedDrawing'
-// import { ReceivedCoordinates } from '../components/ReceivedCoordinates'
+// import Draw from '../components/Draw'
+// import { ReceivedDrawing } from '../components/ReceivedDrawing'
+import Navbar from '../components/Navbar'
+import { View, useTheme } from 'native-base'
 
 const DrawScreen = () => {
-  const { data: lastMessageReceived } = useLastMessagesIndex()
+  const { colors } = useTheme()
+  // const { data: lastMessageReceived } = useLastMessagesIndex()
 
   return (
-    <>
-      <Draw />
-      <ReceivedDrawing message={lastMessageReceived?.content} />
-      {/* <ReceivedCoordinates message={lastMessageReceived} /> */}
-    </>
+    <View style={{ backgroundColor: colors.primary['600'], height: '100%' }}>
+      <Navbar />
+      {/* <ReceivedDrawing message={lastMessageReceived?.content} /> */}
+      {/* <Draw /> */}
+    </View>
   )
 }
 
