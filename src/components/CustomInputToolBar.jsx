@@ -60,10 +60,22 @@ export default function CustomInputToolbar(props) {
         paddingLeft: 20,
       }}>
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', alignSelf: 'center' }}>
-        <Entypo name="pencil" size={24} style={{ padding: 10 }} color={colors.white} />
-        <Text style={{ textAlign: 'center', fontSize: fontSizes.primary, color: colors.white }}>
-          Dessinez votre message
-        </Text>
+        <View style={{ flex: 10, width: '100%' }}>
+          <HStack space={3} style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Entypo name="pencil" size={24} color={colors.white} />
+            <Text style={{ textAlign: 'center', fontSize: fontSizes.primary, color: colors.white }}>
+              Dessinez votre message
+            </Text>
+          </HStack>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+          }}>
+          <SimpleLineIcons name="size-fullscreen" size={20} color={colors.white} />
+        </View>
       </View>
       <View style={{ flex: 5, height: '100%' }}>{renderComposer?.(props)}</View>
     </View>
