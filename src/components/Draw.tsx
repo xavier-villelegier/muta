@@ -58,7 +58,7 @@ const Draw = ({ paths, setPaths, pathCoordinates }: any) => {
             <Ionicons name="close" size={30} color={colors.light['900']} />
           </TouchableOpacity>
           <Canvas style={{ flex: 8 }}>
-            {paths.map((p, index) => (
+            {paths?.map((p, index) => (
               <Path
                 key={index}
                 path={p.segments.join(' ')}
