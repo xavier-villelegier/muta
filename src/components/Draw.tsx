@@ -6,6 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { useTheme } from 'native-base'
 import SendButton from './chat/SendButton'
 import { useMessageCreate } from '../queries/useMessages'
+import ClearButton from './chat/ClearButton'
 
 export interface IPath {
   segments: String[]
@@ -66,13 +67,6 @@ const Draw = (props) => {
       <GestureHandlerRootView style={{ flex: 3 }}>
         <GestureDetector gesture={pan}>
           <View style={{ flex: 1, backgroundColor: 'white', borderRadius: 10 }}>
-            <TouchableOpacity
-              onPress={onClear}
-              style={{
-                margin: 10,
-              }}>
-              <Ionicons name="close" size={30} color={colors.light['900']} />
-            </TouchableOpacity>
             <Canvas style={{ flex: 1 }}>
               {paths?.map((p, index) => (
                 <Path
@@ -92,9 +86,10 @@ const Draw = (props) => {
           flex: 1,
           width: '100%',
           flexDirection: 'row',
-          justifyContent: 'flex-end',
+          justifyContent: 'space-between',
           paddingTop: 20,
         }}>
+        <ClearButton onClear={onClear} />
         <SendButton onSend={onSend} disabled={paths.length === 0} />
       </View>
     </>

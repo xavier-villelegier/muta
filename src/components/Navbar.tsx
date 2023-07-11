@@ -23,7 +23,7 @@ const Navbar = () => {
             PD
           </Avatar>
           <Text color={colors.light['200']} fontSize="20">
-            Paul Dupont
+            Jean Buissou
           </Text>
         </HStack>
       </HStack>
