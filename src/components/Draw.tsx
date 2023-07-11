@@ -63,7 +63,7 @@ const Draw = (props) => {
 
   return (
     <>
-      <GestureHandlerRootView style={{ flex: 5 }}>
+      <GestureHandlerRootView style={{ flex: 3 }}>
         <GestureDetector gesture={pan}>
           <View style={{ flex: 1, backgroundColor: 'white', borderRadius: 10 }}>
             <TouchableOpacity
