@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react'
-import { View } from 'react-native'
+import React from 'react'
+import { TouchableOpacity, View } from 'react-native'
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Canvas, Path } from '@shopify/react-native-skia'
-import { Button } from 'native-base'
-import { useMessageCreate } from '../queries/useMessages'
+import Ionicons from '@expo/vector-icons/Ionicons'
+import { useTheme } from 'native-base'
 
 export interface IPath {
   segments: String[]
@@ -18,7 +18,7 @@ export interface Point {
 // https://medium.com/react-native-rocket/building-a-hand-drawing-app-with-react-native-skia-and-gesture-handler-9797f5f7b9b4
 
 const Draw = ({ paths, setPaths, pathCoordinates }: any) => {
-  // const { mutateAsync: sendMessage } = useMessageCreate()
+  const { colors } = useTheme()
 
   const pan = Gesture.Pan()
     .onStart((g) => {
@@ -46,42 +46,31 @@ const Draw = ({ paths, setPaths, pathCoordinates }: any) => {
     setPaths([])
   }
 
-  // const onSend = async () => {
-  //   await sendMessage({
-  //     coordinates: pathCoordinates.current,
-  //   })
-  //   onClear()
-  // }
-
   return (
-    <>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <GestureDetector gesture={pan}>
-          <View style={{ flex: 1, backgroundColor: 'white', borderRadius: 10 }}>
-            <Canvas style={{ flex: 8 }}>
-              {paths.map((p, index) => (
-                <Path
-                  key={index}
-                  path={p.segments.join(' ')}
-                  strokeWidth={5}
-                  style="stroke"
-                  color={p.color}
-                />
-              ))}
-            </Canvas>
-          </View>
-        </GestureDetector>
-      </GestureHandlerRootView>
-      {/* <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          width: '100%',
-        }}>
-        <Button onPress={onClear}>Clear</Button>
-        <Button onPress={onSend}>Send</Button>
-      </View> */}
-    </>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureDetector gesture={pan}>
+        <View style={{ flex: 1, backgroundColor: 'white', borderRadius: 10 }}>
+          <TouchableOpacity
+            onPress={onClear}
+            style={{
+              margin: 10,
+            }}>
+            <Ionicons name="close" size={30} color={colors.light['900']} />
+          </TouchableOpacity>
+          <Canvas style={{ flex: 8 }}>
+            {paths.map((p, index) => (
+              <Path
+                key={index}
+                path={p.segments.join(' ')}
+                strokeWidth={5}
+                style="stroke"
+                color={p.color}
+              />
+            ))}
+          </Canvas>
+        </View>
+      </GestureDetector>
+    </GestureHandlerRootView>
   )
 }
 
