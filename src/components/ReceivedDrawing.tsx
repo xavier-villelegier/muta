@@ -25,7 +25,7 @@ export const ReceivedDrawing = ({ content }: { content: Point[] }) => {
   return (
     <View flex={1}>
       <Canvas style={{ flex: 1 }}>
-        <Path path={path} strokeWidth={5} style="stroke" color="#000000" start={0} end={1} />
+        <Path path={path} strokeWidth={5} style="stroke" color="#000000" start={0} end={end} />
       </Canvas>
     </View>
   )
