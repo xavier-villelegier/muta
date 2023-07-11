@@ -13,9 +13,7 @@ export const useMessageCreate = () =>
     ['messages'],
     async ({ coordinates }: { coordinates: Point[] }) =>
       await axios.post('/messages', {
-        content: {
-          coordinates,
-        },
+        content: coordinates,
         is_mobile: true,
       })
   )
