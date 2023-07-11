@@ -4,25 +4,31 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Keyboard, Icon, ViewStyle, Text } from 'react-native'
 import { Send, Actions, Composer } from 'react-native-gifted-chat'
 
-const renderSend = (props) => (
-  <Send
-    {...props}
-    disabled={!props.text}
-    containerStyle={{
-      width: 44,
-      height: 44,
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginHorizontal: 4,
-    }}>
-    <Image
-      style={{ width: 32, height: 32 }}
-      source={{
-        uri: IMAGE_URL,
-      }}
-    />
-  </Send>
-)
+IMAGE_URL =
+  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=32&q=32g.com/140/140/any'
+
+function renderSend(props) {
+  return (
+    <Send
+      {...props}
+      disabled={!props.text}
+      containerStyle={{
+        width: 44,
+        height: 44,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: 4,
+        position: 'relative',
+      }}>
+      <Image
+        style={{ width: 32, height: 32 }}
+        source={{
+          uri: IMAGE_URL,
+        }}
+      />
+    </Send>
+  )
+}
 
 const renderActions = (props) => (
   <Actions
@@ -98,7 +104,7 @@ export default function CustomInputToolbar(props) {
   }, [])
 
   const { containerStyle, ...rest } = props
-  const { onPressActionButton, renderAccessory } = rest
+  const { onPressActionButton, renderSend, renderAccessory } = rest
   return (
     <View
       style={{
@@ -117,7 +123,9 @@ export default function CustomInputToolbar(props) {
         <Text style={{ textAlign: 'center', fontSize: fontSizes.primary, color: colors.white }}>
           Dessinez votre message
         </Text>
+        {renderSend?.(props)}
       </View>
+
       <View style={{ height: 60, backgroundColor: 'blue' }}></View>
     </View>
   )
