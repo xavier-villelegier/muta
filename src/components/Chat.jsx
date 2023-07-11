@@ -32,7 +32,7 @@ const Chat = ({ messages }) => {
           {...props}
         />
       )}
-      renderComposer={() => <Draw />}
+      renderComposer={(props) => <Draw {...props} />}
       alwaysShowSend={true}
     />
   )

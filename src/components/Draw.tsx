@@ -19,11 +19,13 @@ export interface Point {
 
 // https://medium.com/react-native-rocket/building-a-hand-drawing-app-with-react-native-skia-and-gesture-handler-9797f5f7b9b4
 
-const Draw = () => {
+const Draw = (props) => {
   const [paths, setPaths] = useState([])
   const pathCoordinates = useRef([])
   const { colors } = useTheme()
   const { mutateAsync: sendMessage } = useMessageCreate()
+
+  const { setShowDrawingInput } = props
 
   const pan = Gesture.Pan()
     .onStart((g) => {
@@ -56,6 +58,7 @@ const Draw = () => {
       coordinates: pathCoordinates.current,
     })
     onClear()
+    setShowDrawingInput(false)
   }
 
   return (
@@ -92,7 +95,7 @@ const Draw = () => {
           justifyContent: 'flex-end',
           paddingTop: 20,
         }}>
-        <SendButton onSend={onSend} />
+        <SendButton onSend={onSend} disabled={paths.length === 0} />
       </View>
     </>
   )
