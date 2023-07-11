@@ -5,7 +5,7 @@ import { Canvas, Path } from '@shopify/react-native-skia'
 import { Button } from 'native-base'
 import { useMessageCreate } from '../queries/useMessages'
 
-interface IPath {
+export interface IPath {
   segments: String[]
   color?: string
 }
@@ -17,10 +17,8 @@ export interface Point {
 
 // https://medium.com/react-native-rocket/building-a-hand-drawing-app-with-react-native-skia-and-gesture-handler-9797f5f7b9b4
 
-export default function Draw() {
-  const { mutateAsync: sendMessage } = useMessageCreate()
-  const [paths, setPaths] = useState<IPath[]>([])
-  const pathCoordinates = useRef<Point[]>([])
+const Draw = ({ paths, setPaths, pathCoordinates }: any) => {
+  // const { mutateAsync: sendMessage } = useMessageCreate()
 
   const pan = Gesture.Pan()
     .onStart((g) => {
@@ -48,18 +46,18 @@ export default function Draw() {
     setPaths([])
   }
 
-  const onSend = async () => {
-    await sendMessage({
-      coordinates: pathCoordinates.current,
-    })
-    onClear()
-  }
+  // const onSend = async () => {
+  //   await sendMessage({
+  //     coordinates: pathCoordinates.current,
+  //   })
+  //   onClear()
+  // }
 
   return (
     <>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <GestureDetector gesture={pan}>
-          <View style={{ flex: 1, backgroundColor: 'white' }}>
+          <View style={{ flex: 1, backgroundColor: 'white', borderRadius: 10 }}>
             <Canvas style={{ flex: 8 }}>
               {paths.map((p, index) => (
                 <Path
@@ -74,7 +72,7 @@ export default function Draw() {
           </View>
         </GestureDetector>
       </GestureHandlerRootView>
-      <View
+      {/* <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-around',
@@ -82,7 +80,9 @@ export default function Draw() {
         }}>
         <Button onPress={onClear}>Clear</Button>
         <Button onPress={onSend}>Send</Button>
-      </View>
+      </View> */}
     </>
   )
 }
+
+export default Draw

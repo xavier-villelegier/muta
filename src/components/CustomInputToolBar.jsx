@@ -104,34 +104,35 @@ export default function CustomInputToolbar(props) {
   }, [])
 
   const { containerStyle, ...rest } = props
-  const { onPressActionButton, renderSend, renderAccessory } = rest
+  const { onPressActionButton, renderSend, renderAccessory, renderComposer } = rest
   return (
     <View
       style={{
         height: fullScreen ? '90%' : '50%',
         backgroundColor: colors.primary['800'],
         position: 'absolute',
-        paddingTop: '10%',
         bottom: 0,
         left: 0,
         right: 0,
         borderTopLeftRadius: 24,
         borderTopRightRadius: 24,
+        paddingRight: 20,
+        paddingLeft: 20,
       }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center' }}>
+      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', alignSelf: 'center' }}>
         <Entypo name="pencil" size={24} style={{ padding: 10 }} color={colors.white} />
         <Text style={{ textAlign: 'center', fontSize: fontSizes.primary, color: colors.white }}>
           Dessinez votre message
         </Text>
       </View>
-      <View style={{ height: 60, backgroundColor: 'blue' }}></View>
+      <View style={{ flex: 5, height: '100%' }}>{renderComposer?.(props)}</View>
       <View
         style={{
+          flex: 1,
           width: '100%',
           flexDirection: 'row',
           justifyContent: 'flex-end',
           paddingTop: 20,
-          paddingRight: 20,
         }}>
         {renderSend?.(props)}
       </View>
