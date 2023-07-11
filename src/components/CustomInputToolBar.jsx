@@ -5,6 +5,7 @@ import { StyleSheet, View, Keyboard, ViewStyle, Text } from 'react-native'
 import { Send, Actions, Composer } from 'react-native-gifted-chat'
 import { SimpleLineIcons } from '@expo/vector-icons'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 IMAGE_URL =
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=32&q=32g.com/140/140/any'
 
@@ -48,14 +49,14 @@ export default function CustomInputToolbar(props) {
   return (
     <View
       style={{
-        height: fullScreen ? '90%' : '50%',
+        height: fullScreen ? '100%' : '40%',
         backgroundColor: colors.primary['800'],
         position: 'absolute',
         bottom: 0,
         left: 0,
         right: 0,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
+        borderTopLeftRadius: fullScreen ? 0 : 24,
+        borderTopRightRadius: fullScreen ? 0 : 24,
         paddingRight: 20,
         paddingLeft: 20,
       }}>
@@ -74,7 +75,9 @@ export default function CustomInputToolbar(props) {
             flexDirection: 'row',
             justifyContent: 'flex-end',
           }}>
-          <SimpleLineIcons name="size-fullscreen" size={20} color={colors.white} />
+          <TouchableOpacity onPress={() => setFullScreen(!fullScreen)}>
+            <SimpleLineIcons name="size-fullscreen" size={20} color={colors.white} />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={{ flex: 5, height: '100%' }}>{renderComposer?.(props)}</View>
