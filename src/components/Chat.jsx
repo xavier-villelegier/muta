@@ -14,8 +14,8 @@ const Chat = ({ messages }) => {
     _id: id,
     image: content,
     user: {
-      _id: user_type === 'device' ? 1 : 2,
-      name: user_type === 'device' ? 'Moi' : 'Lui',
+      _id: user_type === 'device' ? 2 : 1,
+      name: user_type === 'device' ? 'Lui' : 'Moi',
       avatar: IMAGE_URL,
     },
     createdAt: date,
@@ -34,6 +34,11 @@ const Chat = ({ messages }) => {
       )}
       renderComposer={(props) => <Draw {...props} />}
       alwaysShowSend={true}
+      user={{
+        _id: 1,
+        name: 'Moi',
+        avatar: 'https://placeimg.com/140/140/any',
+      }}
     />
   )
 }
