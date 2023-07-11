@@ -1,28 +1,32 @@
 import { Canvas, Path, Skia, runTiming, useValue } from '@shopify/react-native-skia'
 import { Point } from './Draw'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { View } from 'native-base'
 
-export const ReceivedDrawing = ({ message }: { message: Point[] }) => {
+export const ReceivedDrawing = ({ content }: { content: Point[] }) => {
   const end = useValue(0)
 
   let path = Skia.Path.Make()
 
   useEffect(() => {
-    if (!message) return
+    if (!content) return
 
-    path.moveTo(message[0].x, message[0].y)
-    message.map(({ x, y }: Point) => {
+    path.moveTo(content[0].x, content[0].y)
+    content.map(({ x, y }: Point) => {
       path.lineTo(x, y)
     })
 
     runTiming(end, { from: 0, to: 1 }, { duration: 1000 })
-  }, [message])
+  }, [])
 
-  if (!message) return null
+  // if (!content) return null
+  console.log('rendered')
 
   return (
-    <Canvas style={{ flex: 1 }}>
-      <Path path={path} strokeWidth={5} style="stroke" color="#000000" start={0} end={end} />
-    </Canvas>
+    <View flex={1}>
+      <Canvas style={{ flex: 1 }}>
+        <Path path={path} strokeWidth={5} style="stroke" color="#000000" start={0} end={1} />
+      </Canvas>
+    </View>
   )
 }

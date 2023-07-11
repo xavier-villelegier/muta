@@ -1,49 +1,47 @@
-import React, { useState, useCallback, useEffect } from 'react'
-import { Image } from 'react-native'
-import { GiftedChat, Send } from 'react-native-gifted-chat'
+import React, { useState, useRef } from 'react'
+import { GiftedChat } from 'react-native-gifted-chat'
 import CustomInputToolBar from './CustomInputToolBar'
 import SendButton from './chat/SendButton'
+import Message from './Message'
+import Draw from './Draw'
+import { useMessageCreate } from '../queries/useMessages'
 
 IMAGE_URL =
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=32&q=32g.com/140/140/any'
-const renderInputToolbar = (props) => {
-  return <CustomInputToolBar {...props} />
-}
 
-const Chat = () => {
-  const [messages, setMessages] = useState([])
+const Chat = ({ messages }) => {
+  const [paths, setPaths] = useState([])
+  const pathCoordinates = useRef([])
+  const { mutateAsync: sendMessage } = useMessageCreate()
 
-  useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: IMAGE_URL,
-        },
-      },
-    ])
-  }, [])
+  const formattedMessages = messages.map(({ id, content, user_type, date }) => ({
+    _id: id,
+    text: content,
+    user: {
+      _id: user_type === 'device' ? 1 : 2,
+      name: user_type === 'device' ? 'Moi' : 'Lui',
+      avatar: IMAGE_URL,
+    },
+    createdAt: date,
+  }))
 
-  const onSend = useCallback((messages) => {
-    setMessages((previousMessages) => GiftedChat.append(previousMessages, messages))
-  }, [])
+  const onSend = async () => {
+    await sendMessage({
+      coordinates: pathCoordinates.current,
+    })
+    setPaths([])
+  }
 
   return (
     <GiftedChat
-      messages={messages}
-      onSend={(messages) => onSend(messages)}
-      renderInputToolbar={renderInputToolbar}
-      user={{
-        _id: 1,
-        name: 'Moi',
-        avatar: 'https://placeimg.com/140/140/any',
-      }}
+      messages={formattedMessages}
+      renderMessageText={({ currentMessage }) => <Message message={currentMessage} />}
+      renderInputToolbar={(props) => <CustomInputToolBar {...props} />}
+      renderComposer={(props) => (
+        <Draw paths={paths} setPaths={setPaths} pathCoordinates={pathCoordinates} />
+      )}
       alwaysShowSend={true}
-      renderSend={SendButton}
+      renderSend={() => <SendButton onSend={onSend} />}
     />
   )
 }

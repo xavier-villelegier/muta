@@ -1,26 +1,28 @@
 import { HStack, Text, useTheme } from 'native-base'
-import { Send } from 'react-native-gifted-chat'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const SendButton = (props: any) => {
+const SendButton = ({ onSend }) => {
   const { colors } = useTheme()
 
   return (
-    <Send
-      {...props}
-      disabled={!props.text}
-      containerStyle={{
+    <TouchableOpacity
+      accessible
+      accessibilityLabel="send"
+      style={{
         padding: 10,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
         borderRadius: 22,
-      }}>
+      }}
+      onPress={onSend}
+      accessibilityRole="button">
       <HStack space={2} alignItems="center">
         <Ionicons name="paper-plane" size={20} color={colors.primary['900']} />
         <Text color={colors.primary['900']}>Envoyer</Text>
       </HStack>
-    </Send>
+    </TouchableOpacity>
   )
 }
 
