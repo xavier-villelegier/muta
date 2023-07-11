@@ -1,10 +1,8 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react'
-import { Image } from 'react-native'
-import { GiftedChat, Send } from 'react-native-gifted-chat'
+import React, { useState, useRef } from 'react'
+import { GiftedChat } from 'react-native-gifted-chat'
 import CustomInputToolBar from './CustomInputToolBar'
 import SendButton from './chat/SendButton'
 import Message from './Message'
-import { Text } from 'native-base'
 import Draw from './Draw'
 import { useMessageCreate } from '../queries/useMessages'
 
@@ -27,14 +25,12 @@ const Chat = ({ messages }) => {
     createdAt: date,
   }))
 
-  const onSend = useCallback(async (messages) => {
-    console.log('On send clicked')
+  const onSend = async () => {
     await sendMessage({
       coordinates: pathCoordinates.current,
     })
     setPaths([])
-    setMessages((previousMessages) => GiftedChat.append(previousMessages, messages))
-  }, [])
+  }
 
   return (
     <GiftedChat
@@ -45,8 +41,7 @@ const Chat = ({ messages }) => {
         <Draw paths={paths} setPaths={setPaths} pathCoordinates={pathCoordinates} />
       )}
       alwaysShowSend={true}
-      renderSend={SendButton}
-      onSend={(messages) => onSend(messages)}
+      renderSend={() => <SendButton onSend={onSend} />}
     />
   )
 }
