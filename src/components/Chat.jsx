@@ -16,7 +16,7 @@ const Chat = ({ messages }) => {
 
   const formattedMessages = messages.map(({ id, content, user_type, date }) => ({
     _id: id,
-    text: content,
+    image: content,
     user: {
       _id: user_type === 'device' ? 1 : 2,
       name: user_type === 'device' ? 'Moi' : 'Lui',
@@ -35,7 +35,7 @@ const Chat = ({ messages }) => {
   return (
     <GiftedChat
       messages={formattedMessages}
-      renderMessageText={({ currentMessage }) => <Message message={currentMessage} />}
+      renderMessageImage={({ currentMessage }) => <Message message={currentMessage} />}
       renderInputToolbar={(props) => <CustomInputToolBar {...props} />}
       renderComposer={(props) => (
         <Draw paths={paths} setPaths={setPaths} pathCoordinates={pathCoordinates} />

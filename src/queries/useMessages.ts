@@ -3,10 +3,14 @@ import axios from 'axios'
 import { Point } from '../components/Draw'
 
 export const useMessagesIndex = () =>
-  useQuery(['messages'], async () => {
-    const { data } = await axios.get('/messages')
-    return data
-  })
+  useQuery(
+    ['messages'],
+    async () => {
+      const { data } = await axios.get('/messages')
+      return data
+    },
+    { refetchInterval: 1000 }
+  )
 
 export const useMessageCreate = () =>
   useMutation(

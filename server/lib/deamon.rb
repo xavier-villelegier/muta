@@ -9,7 +9,7 @@ def listen_app_messages
     has_new_message = last_message_id != new_last_message_id
     if has_new_message
       socket = UDPSocket.new
-      socket.send(Message.last.content, 0, '192.168.27.77', 3001)
+      socket.send(Message.last.content.to_s, 0, '192.168.27.77', 3001)
       puts Message.last.content
       last_message_id = new_last_message_id
       # send message to robotic arm
