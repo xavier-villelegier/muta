@@ -74,7 +74,7 @@ On `http://127.0.0.1:3000` you should see the rails home page, this means your b
 
 ### TODO:
 
-[X] discossier le provider du message ('skin'/'phone')
+[X] dissocier le provider du message ('device'/'phone')
 [ ] parser ce qui est reçu de la skin
 [ ] ajouter la notion de temporalité avec les 'timestamps' pour dessiner une réponse
 [ ] faire le UI dans l'app
