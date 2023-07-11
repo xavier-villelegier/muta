@@ -14,12 +14,11 @@ const DrawScreen = () => {
   return (
     <View style={{ backgroundColor: colors.primary['600'], height: '100%' }}>
       <Navbar />
-  
-    <Chat />
+      <Chat />
       {/* <Draw /> */}
       {/* <ReceivedDrawing message={lastMessageReceived?.content} /> */}
       {/* <ReceivedCoordinates message={lastMessageReceived} /> */}
-      </View>
+    </View>
   )
 }
 

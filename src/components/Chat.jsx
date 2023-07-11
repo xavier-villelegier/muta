@@ -1,40 +1,22 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { Avatar } from 'native-base'
 import { Image } from 'react-native'
-import { GiftedChat, MessageContainer, InputToolbar, Send, Actions } from 'react-native-gifted-chat'
+import { GiftedChat, MessageContainer, InputToolbar, Actions } from 'react-native-gifted-chat'
 import DrawInput from '../components/DrawInput'
+import SendButton from './chat/SendButton'
 
 IMAGE_URL =
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=32&q=32g.com/140/140/any'
+
 const renderInputToolbar = (props) => (
   <InputToolbar
     {...props}
     containerStyle={{
       backgroundColor: '#222B45',
       paddingTop: 6,
+      height: '25%',
     }}
     primaryStyle={{ alignItems: 'center' }}
   />
-)
-
-const renderSend = (props) => (
-  <Send
-    {...props}
-    disabled={!props.text}
-    containerStyle={{
-      width: 44,
-      height: 44,
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginHorizontal: 4,
-    }}>
-    <Image
-      style={{ width: 32, height: 32 }}
-      source={{
-        uri: IMAGE_URL,
-      }}
-    />
-  </Send>
 )
 
 const renderActions = (props) => (
@@ -76,7 +58,7 @@ const Chat = () => {
     setMessages([
       {
         _id: 1,
-        text: 'Hello edeveloper',
+        text: 'Hello developer',
         createdAt: new Date(),
         user: {
           _id: 2,
@@ -97,7 +79,7 @@ const Chat = () => {
       onSend={(messages) => onSend(messages)}
       renderInputToolbar={renderInputToolbar}
       renderActions={renderActions}
-      renderSend={renderSend}
+      renderSend={SendButton}
       user={{
         _id: 1,
         name: 'Moi',
