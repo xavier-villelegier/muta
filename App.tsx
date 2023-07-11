@@ -30,6 +30,11 @@ export default function App() {
         200: '#ECECEC',
       },
     },
+    fontSizes: {
+      primary: 16,
+      small: 14,
+      big: 20
+    },
     config: {
       initialColorMode: 'dark',
     },
