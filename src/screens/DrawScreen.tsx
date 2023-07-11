@@ -27,7 +27,6 @@ const DrawScreen = () => {
           ))}
         </ScrollView>
       )} */}
-      <Draw />
       {/* <ReceivedDrawing content={lastMessageReceived?.content} /> */}
       {/* <ReceivedCoordinates message={lastMessageReceived} /> */}
     </View>
