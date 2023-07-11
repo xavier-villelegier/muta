@@ -1,4 +1,4 @@
-import { useTheme } from 'native-base'
+import { Box, useTheme } from 'native-base'
 import { Entypo } from '@expo/vector-icons'
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Keyboard, Icon, ViewStyle, Text } from 'react-native'
@@ -123,10 +123,18 @@ export default function CustomInputToolbar(props) {
         <Text style={{ textAlign: 'center', fontSize: fontSizes.primary, color: colors.white }}>
           Dessinez votre message
         </Text>
+      </View>
+      <View style={{ height: 60, backgroundColor: 'blue' }}></View>
+      <View
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          paddingTop: 20,
+          paddingRight: 20,
+        }}>
         {renderSend?.(props)}
       </View>
-
-      <View style={{ height: 60, backgroundColor: 'blue' }}></View>
     </View>
   )
 }
