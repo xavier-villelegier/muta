@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   skip_before_action :verify_authenticity_token # temporary until we implement the login
 
   def index
-    messages = Message.all
+    messages = Message.all.order(created_at: :desc)
     messages_list =
       messages.map do |message|
         { id: message.id, content: message.content, user_type: message.user_type, date: message.created_at }

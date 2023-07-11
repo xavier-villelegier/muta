@@ -6,43 +6,34 @@ import { Send, Actions, Composer } from 'react-native-gifted-chat'
 import { SimpleLineIcons } from '@expo/vector-icons'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+
 IMAGE_URL =
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=32&q=32g.com/140/140/any'
 
-const styles = StyleSheet.create({
-  container: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: 'blue',
-    backgroundColor: 'white',
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  primary: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-  },
-  accessory: {
-    height: 44,
-  },
-})
-
 export default function CustomInputToolbar(props) {
   const { colors, fontSizes } = useTheme()
-  const [isClicked, setIsClicked] = useState(true)
-  const [fullScreen, setFullScreen] = useState(true)
-  useEffect(() => {
-    return () => {}
-  }, [])
+  const [fullScreen, setFullScreen] = useState(false)
 
-  const { containerStyle, ...rest } = props
-  const { onPressActionButton, renderSend, renderAccessory, renderComposer } = rest
-  if (!isClicked) {
+  const { containerStyle, showDrawingInput, setShowDrawingInput, ...rest } = props
+  const { renderComposer } = rest
+
+  if (!showDrawingInput) {
     return (
-      <HStack space={2} alignItems="center">
-        <Ionicons name="paper-plane" size={20} color={colors.primary['800']} />
-        <Text color={colors.primary['900']}>Envoyer</Text>
-      </HStack>
+      <TouchableOpacity onPress={() => setShowDrawingInput(true)}>
+        <View
+          style={{
+            backgroundColor: colors.primary['800'],
+            borderRadius: 32,
+            padding: 18,
+            width: '80%',
+            alignSelf: 'center',
+          }}>
+          <HStack space={2} alignItems="center" justifyContent="center">
+            <Ionicons name="pencil" size={20} color="white" />
+            <Text style={{ color: 'white', fontSize: 16 }}>Dessinez votre message</Text>
+          </HStack>
+        </View>
+      </TouchableOpacity>
     )
   }
 
@@ -60,7 +51,18 @@ export default function CustomInputToolbar(props) {
         paddingRight: 20,
         paddingLeft: 20,
       }}>
-      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', alignSelf: 'center' }}>
+      <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={() => setShowDrawingInput(false)}>
+          <Entypo name="chevron-down" size={28} color={colors.white} />
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          flex: fullScreen ? 1 : 2,
+          flexDirection: 'row',
+          alignItems: 'center',
+          alignSelf: 'center',
+        }}>
         <View style={{ flex: 10, width: '100%' }}>
           <HStack space={3} style={{ justifyContent: 'center', alignItems: 'center' }}>
             <Entypo name="pencil" size={24} color={colors.white} />
@@ -80,7 +82,7 @@ export default function CustomInputToolbar(props) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{ flex: 5, height: '100%' }}>{renderComposer?.(props)}</View>
+      <View style={{ flex: fullScreen ? 12 : 9, height: '100%' }}>{renderComposer?.(props)}</View>
     </View>
   )
 }
