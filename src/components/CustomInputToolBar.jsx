@@ -66,16 +66,6 @@ export default function CustomInputToolbar(props) {
         </Text>
       </View>
       <View style={{ flex: 5, height: '100%' }}>{renderComposer?.(props)}</View>
-      <View
-        style={{
-          flex: 1,
-          width: '100%',
-          flexDirection: 'row',
-          justifyContent: 'flex-end',
-          paddingTop: 20,
-        }}>
-        {renderSend?.(props)}
-      </View>
     </View>
   )
 }
