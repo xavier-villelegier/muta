@@ -23,7 +23,7 @@ export default function App() {
       primary: {
         600: '#D7F4EC',
         700: '#44CAA2',
-        800: '#377461',
+        800: '#3395DB',
         900: '#214F41',
       },
       light: {

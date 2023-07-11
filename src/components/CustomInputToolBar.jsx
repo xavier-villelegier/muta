@@ -1,82 +1,12 @@
-import { useTheme } from 'native-base'
 import { Entypo } from '@expo/vector-icons'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Keyboard, Icon, ViewStyle, Text } from 'react-native'
+import { Button, HStack, Box, Icon, useTheme } from 'native-base'
+import { StyleSheet, View, Keyboard, ViewStyle, Text } from 'react-native'
 import { Send, Actions, Composer } from 'react-native-gifted-chat'
-
+import { SimpleLineIcons } from '@expo/vector-icons'
+import Ionicons from '@expo/vector-icons/Ionicons'
 IMAGE_URL =
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=32&q=32g.com/140/140/any'
-
-function renderSend(props) {
-  return (
-    <Send
-      {...props}
-      disabled={!props.text}
-      containerStyle={{
-        width: 44,
-        height: 44,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginHorizontal: 4,
-        position: 'relative',
-      }}>
-      <Image
-        style={{ width: 32, height: 32 }}
-        source={{
-          uri: IMAGE_URL,
-        }}
-      />
-    </Send>
-  )
-}
-
-const renderActions = (props) => (
-  <Actions
-    {...props}
-    containerStyle={{
-      width: 44,
-      height: 44,
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginLeft: 4,
-      marginRight: 4,
-      marginBottom: 0,
-    }}
-    icon={() => (
-      <Image
-        style={{ width: 32, height: 32 }}
-        source={{
-          uri: IMAGE_URL,
-        }}
-      />
-    )}
-    options={{
-      'Choose From Library': () => {
-        console.log('Choose From Library')
-      },
-      Cancel: () => {
-        console.log('Cancel')
-      },
-    }}
-    optionTintColor="#222B45"
-  />
-)
-
-const renderComposer = (props) => (
-  <Composer
-    {...props}
-    textInputStyle={{
-      color: 'green',
-      backgroundColor: 'pink',
-      borderWidth: 1,
-      borderRadius: 5,
-      borderColor: '#E4E9F2',
-      paddingTop: 8.5,
-      paddingHorizontal: 12,
-      marginLeft: 0,
-    }}
-  />
-)
 
 const styles = StyleSheet.create({
   container: {
@@ -98,6 +28,7 @@ const styles = StyleSheet.create({
 
 export default function CustomInputToolbar(props) {
   const { colors, fontSizes } = useTheme()
+  const [isClicked, setIsClicked] = useState(true)
   const [fullScreen, setFullScreen] = useState(true)
   useEffect(() => {
     return () => {}
@@ -105,6 +36,15 @@ export default function CustomInputToolbar(props) {
 
   const { containerStyle, ...rest } = props
   const { onPressActionButton, renderSend, renderAccessory } = rest
+  if (!isClicked) {
+    return (
+      <HStack space={2} alignItems="center">
+        <Ionicons name="paper-plane" size={20} color={colors.primary['800']} />
+        <Text color={colors.primary['900']}>Envoyer</Text>
+      </HStack>
+    )
+  }
+
   return (
     <View
       style={{
@@ -123,10 +63,16 @@ export default function CustomInputToolbar(props) {
         <Text style={{ textAlign: 'center', fontSize: fontSizes.primary, color: colors.white }}>
           Dessinez votre message
         </Text>
-        {renderSend?.(props)}
+        <SimpleLineIcons
+          name="size-fullscreen"
+          size={16}
+          // style={{ alignSelf: 'right' }}
+          color={colors.white}
+        />
       </View>
 
       <View style={{ height: 60, backgroundColor: 'blue' }}></View>
+      {renderSend?.(props)}
     </View>
   )
 }
