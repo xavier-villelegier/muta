@@ -3,10 +3,10 @@ require 'json'
 
 def listen_app_messages
   puts 'APP - Listening for app messages…'
-  last_message_id = Message.last.id
+  last_message_id = Message.last&.id
 
   while 1
-    new_last_message_id = Message.last.id
+    new_last_message_id = Message.last&.id
     has_new_message = last_message_id != new_last_message_id
     if has_new_message
       socket = UDPSocket.new
