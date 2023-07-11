@@ -1,6 +1,6 @@
 import { Entypo } from '@expo/vector-icons'
 import React, { useEffect, useState } from 'react'
-import { Button, HStack, Box, Icon, useTheme } from 'native-base'
+import { Button, HStack, Box, Icon, useTheme, VStack } from 'native-base'
 import { StyleSheet, View, Keyboard, ViewStyle, Text } from 'react-native'
 import { Send, Actions, Composer } from 'react-native-gifted-chat'
 import { SimpleLineIcons } from '@expo/vector-icons'
@@ -19,21 +19,29 @@ export default function CustomInputToolbar(props) {
 
   if (!showDrawingInput) {
     return (
-      <TouchableOpacity onPress={() => setShowDrawingInput(true)}>
-        <View
-          style={{
-            backgroundColor: colors.primary['800'],
-            borderRadius: 32,
-            padding: 18,
-            width: '80%',
-            alignSelf: 'center',
-          }}>
-          <HStack space={2} alignItems="center" justifyContent="center">
-            <Ionicons name="pencil" size={20} color="white" />
-            <Text style={{ color: 'white', fontSize: 16 }}>Dessinez votre message</Text>
-          </HStack>
-        </View>
-      </TouchableOpacity>
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 20,
+          left: 0,
+          right: 0,
+        }}>
+        <TouchableOpacity onPress={() => setShowDrawingInput(true)}>
+          <View
+            style={{
+              backgroundColor: colors.primary['800'],
+              borderRadius: 32,
+              padding: 18,
+              width: '80%',
+              alignSelf: 'center',
+            }}>
+            <HStack space={2} alignItems="center" justifyContent="center">
+              <Ionicons name="pencil" size={20} color="white" />
+              <Text style={{ color: 'white', fontSize: 16 }}>Dessinez votre message</Text>
+            </HStack>
+          </View>
+        </TouchableOpacity>
+      </View>
     )
   }
 
