@@ -1,6 +1,17 @@
 require 'test_helper'
 
 class MessagesControllerTest < ActionDispatch::IntegrationTest
+  test '#index' do
+    content = {
+      "coordinates": [{x:10,y:10},{x:20,y:10},{x:10,y:20},{x:20,y:20}]
+    }
+
+    Message.create!(content: content)
+
+    get messages_path
+    response = JSON.parse(@response.body)
+  end
+
   test '#create with mobile' do
     content = {
       "coordinates": [{x:10,y:10},{x:20,y:10},{x:10,y:20},{x:20,y:20}]
