@@ -1,4 +1,5 @@
 require 'socket'
+require 'json'
 
 def listen_app_messages
   puts 'APP - Listening for app messages…'
@@ -865,12 +866,14 @@ def listen_skin_messages
   while 1
     puts 'SKIN - Waiting for request'
     received_message = socket.recvfrom(60_000).first
-    received_message = mock_message_received
-    puts "SKIN - Message received: #{received_message}"
+    parsed_message = JSON.parse(received_message)
+    # parsed_message = mock_message_received
+    puts "SKIN - Message received: #{parsed_message}"
 
     # create an array of mock_message_received values sorted by position
-    formatted_message = received_message.sort_by { |_, v| v[:millis] }.map { |_, v| v }
+    formatted_message = parsed_message.sort_by { |_, v| v['millis'] }.map { |_, v| v }
     message = Message.create!(content: formatted_message, user_type: 'device')
+    puts "SKIN - Message saved: #{message.id}"
     # listen_app_messages.thread_variable_set(:last_message_id, message.id)
   end
 end
