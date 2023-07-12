@@ -193,3 +193,7 @@ Message.create!(content: [{"x"=>54.666656494140625,
     "y"=>117.66666793823242},
    {"x"=>315, "y"=>107.33333969116211}])
 ```
+
+# Figma
+
+https://www.figma.com/file/xgDfaALY9r4yEYU0SL7lax/Hackathon-TOM-2023?type=design&node-id=52%3A87&mode=design&t=g4oWvTzpTCX81WFC-1
