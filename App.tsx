@@ -21,7 +21,7 @@ export default function App() {
   const theme = extendTheme({
     colors: {
       primary: {
-        600: '#D7F4EC',
+        600: '#fff',
         700: '#44CAA2',
         800: '#3395DB',
         900: '#214F41',
@@ -33,7 +33,7 @@ export default function App() {
     fontSizes: {
       primary: 16,
       small: 14,
-      big: 20
+      big: 20,
     },
     config: {
       initialColorMode: 'dark',
