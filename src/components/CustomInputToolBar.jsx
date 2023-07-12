@@ -74,7 +74,7 @@ export default function CustomInputToolbar(props) {
           <HStack space={3} style={{ justifyContent: 'center', alignItems: 'center' }}>
             <Entypo name="pencil" size={24} color={colors.white} />
             <Text style={{ textAlign: 'center', fontSize: fontSizes.primary, color: colors.white }}>
-              Dessinez votre message
+              Draw a message
             </Text>
           </HStack>
         </View>

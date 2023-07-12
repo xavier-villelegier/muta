@@ -1,6 +1,6 @@
 import { Canvas, Path, Skia, runTiming, useValue } from '@shopify/react-native-skia'
 import { Point } from './Draw'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { View } from 'native-base'
 
 export const ReceivedDrawing = ({ content }: { content: Point[] }) => {

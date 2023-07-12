@@ -18,7 +18,7 @@ const ClearButton = ({ onClear }) => {
       accessibilityRole="button">
       <HStack space={2} alignItems="center">
         <Ionicons name="close" size={20} color={colors.light['100']} />
-        <Text color={colors.primary['100']}>Effacer</Text>
+        <Text color={colors.primary['100']}>Clear</Text>
       </HStack>
     </TouchableOpacity>
   )

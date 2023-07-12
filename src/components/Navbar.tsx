@@ -1,4 +1,4 @@
-import { Avatar, Box, HStack, Icon, IconButton, StatusBar, Text, useTheme } from 'native-base'
+import { Avatar, Box, HStack, StatusBar, Text, useTheme } from 'native-base'
 
 const Navbar = () => {
   const { colors } = useTheme()
@@ -20,7 +20,7 @@ const Navbar = () => {
             source={{
               uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
             }}>
-            PD
+            JB
           </Avatar>
           <Text color={colors.light['200']} fontSize="20">
             Jean Bouissou

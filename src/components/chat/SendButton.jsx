@@ -21,7 +21,7 @@ const SendButton = ({ onSend, disabled }) => {
       accessibilityRole="button">
       <HStack space={2} alignItems="center">
         <Ionicons name="paper-plane" size={20} color={colors.primary['900']} />
-        <Text color={colors.primary['900']}>Envoyer</Text>
+        <Text color={colors.primary['900']}>Send</Text>
       </HStack>
     </TouchableOpacity>
   )

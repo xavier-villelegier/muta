@@ -2,8 +2,6 @@ import React, { useRef, useState } from 'react'
 import { View } from 'react-native'
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Canvas, Path } from '@shopify/react-native-skia'
-import { Button } from 'native-base'
-import { useMessageCreate } from '../queries/useMessages'
 
 interface IPath {
   segments: String[]
@@ -18,7 +16,6 @@ export interface Point {
 // https://medium.com/react-native-rocket/building-a-hand-drawing-app-with-react-native-skia-and-gesture-handler-9797f5f7b9b4
 
 export default function DrawInput() {
-  const { mutateAsync: sendMessage } = useMessageCreate()
   const [paths, setPaths] = useState<IPath[]>([])
   const pathCoordinates = useRef<Point[]>([])
 
@@ -44,17 +41,6 @@ export default function DrawInput() {
     })
     .minDistance(1)
 
-  const onClear = () => {
-    setPaths([])
-  }
-
-  const onSend = async () => {
-    await sendMessage({
-      coordinates: pathCoordinates.current,
-    })
-    onClear()
-  }
-
   return (
     <>
       <GestureHandlerRootView style={{ flex: 2 }}>
@@ -74,7 +60,6 @@ export default function DrawInput() {
           </View>
         </GestureDetector>
       </GestureHandlerRootView>
-
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 import CustomInputToolBar from './CustomInputToolBar'
 import Message from './Message'
@@ -15,7 +15,7 @@ const Chat = ({ messages }) => {
     image: content,
     user: {
       _id: user_type === 'device' ? 2 : 1,
-      name: user_type === 'device' ? 'Lui' : 'Moi',
+      name: user_type === 'device' ? 'Him' : 'Me',
       avatar: IMAGE_URL,
     },
     createdAt: date,
@@ -36,7 +36,7 @@ const Chat = ({ messages }) => {
       alwaysShowSend={true}
       user={{
         _id: 1,
-        name: 'Moi',
+        name: 'Me',
         avatar: 'https://placeimg.com/140/140/any',
       }}
     />
