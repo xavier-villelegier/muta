@@ -3,19 +3,18 @@ require 'json'
 
 def listen_app_messages
   puts 'APP - Listening for app messages…'
-  last_message_id = Message.last&.id
+  last_message_id = Message.where(user_type: 'mobile').last&.id
 
   while 1
-    new_last_message_id = Message.last&.id
-    has_new_message = last_message_id != new_last_message_id
+    new_last_message_id = Message.where(user_type: 'mobile').last&.id
+    has_new_message = last_message_id != new_last_message_id && new_last_message_id.present?
     if has_new_message
       socket = UDPSocket.new
-      socket.send(Message.last.content.to_s, 0, '192.168.27.77', 3001)
-      puts Message.last.content
+      socket.send(Message.where(user_type: 'mobile').last.content.to_s, 0, '192.168.43.77', 3001)
+      puts new_last_message_id
       last_message_id = new_last_message_id
-      # send message to robotic arm
     end
-    sleep 5
+    sleep 2
   end
 end
 
@@ -871,7 +870,7 @@ def listen_skin_messages
     puts "SKIN - Message received: #{parsed_message}"
 
     # create an array of mock_message_received values sorted by position
-    formatted_message = parsed_message.sort_by { |_, v| v['millis'] }.map { |_, v| v }
+    formatted_message = parsed_message.sort_by { |_, v| v['millis'] || v[:millis] }.map { |_, v| v }
     message = Message.create!(content: formatted_message, user_type: 'device')
     puts "SKIN - Message saved: #{message.id}"
     # listen_app_messages.thread_variable_set(:last_message_id, message.id)
